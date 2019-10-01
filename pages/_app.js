@@ -4,9 +4,11 @@ import { Provider } from 'react-redux'
 import App, { Container } from 'next/app'
 import withRedux from 'next-redux-wrapper'
 import { makeStore } from '../redux/reduxApi.js'
+import { appWithTranslation } from '../i18n'
+
 
 class MyApp extends App {
-  static async getInitialProps ({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     return {
       pageProps: {
         // Call page-level getInitialProps
@@ -15,7 +17,7 @@ class MyApp extends App {
     }
   }
 
-  render () {
+  render() {
     const { Component, pageProps, store } = this.props
     return (
       <Container>
@@ -27,4 +29,4 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(makeStore, { debug: false })(MyApp)
+export default withRedux(makeStore, { debug: false })(appWithTranslation(MyApp))

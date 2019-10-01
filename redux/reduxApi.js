@@ -53,6 +53,16 @@ const thisReduxApi = reduxApi({
     // transformer: transformers.array,
     transformer: apiTransformer
 
+  },
+
+  contacts: {
+    url: '/api/contacts/:id',
+    crud: true, // Make CRUD actions: https://github.com/lexich/redux-api/blob/master/docs/DOCS.md#crud
+
+    // base endpoint options `fetch(url, options)`
+    options: config.jsonOptions,
+    transformer: apiTransformer
+
   }
 
 })
@@ -77,3 +87,4 @@ const mapStateToProps = (endpointNames, reduxState) => {
 export const withReduxEndpoints = (PageComponent, endpointNames) => connect(mapStateToProps.bind(undefined, endpointNames))(PageComponent)
 // Define custom endpoints/providers here:
 export const withKittens = PageComponent => withReduxEndpoints(PageComponent, ['kittens'])
+export const withContacts = PageComponent => withReduxEndpoints(PageComponent, ['contacts'])

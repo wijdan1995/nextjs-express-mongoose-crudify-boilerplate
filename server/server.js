@@ -7,6 +7,10 @@ const mongoose = require('mongoose')
 const glob = require('glob')
 const next = require('next')
 
+//i18n
+const nextI18NextMiddleware = require('next-i18next/middleware').default
+const nextI18next = require('../i18n')
+
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 
@@ -20,7 +24,7 @@ app.prepare().then(() => {
   server.use(bodyParser.urlencoded({ extended: false }))
   // Parse application/json
   server.use(bodyParser.json())
-
+  // server.use(nextI18NextMiddleware(nextI18next))
   // Allows for cross origin domain request:
   server.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
